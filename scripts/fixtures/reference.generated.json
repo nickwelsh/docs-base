@@ -1,0 +1,12 @@
+{
+    "schemaVersion": 1,
+    "title": "Widget schema",
+    "children": [
+        {
+            "kind": "page",
+            "id": "widget-schema",
+            "title": "Widget schema",
+            "blocks": [{ "kind": "markdown", "value": "Widget name and configuration." }]
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+---
+title: Configure your site
+description: Supply identity and content to the shared documentation application.
+icon: settings
+---
+
+## Identity
+
+Edit `waku.config.ts` for the site name, public origin, GitHub repository and base path.
+The package owns layout, navigation, search, styles and MDX rendering.
+
+## Hosting under a path
+
+Set `origin` to your host, such as `https://docs.example.com`, and `basePath` to your application path, such as `/acorn`.
+Links, search, assets, canonical URLs and Markdown endpoints all use that base path.
+
+<Icon name="paint-brush" width={24} height={24} />
+
+## Generated reference content
+
+Run Refquill in your own project, then add its generated JSON file and app-relative route to the `refquill` configuration.
+The package combines the reference pages with your authored documentation.
+
+## Upgrades
+
+Upgrade `@nickwelsh/docs-base`, rebuild, and redeploy to receive shared fixes. Your content stays in this repository.

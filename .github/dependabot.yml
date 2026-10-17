@@ -1,0 +1,35 @@
+version: 2
+updates:
+  # The root pnpm workspace includes packages/docs and examples/starter.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    versioning-strategy: increase
+    groups:
+      workspace-dependencies:
+        patterns: ['*']
+    ignore:
+      # Match the library's minimum supported Node runtime, not the developer's Node version.
+      - dependency-name: '@types/node'
+        versions: ['>=23']
+      # Waku rc.3 requires React 19.3; update the runtime trio together.
+      - dependency-name: react
+        versions: ['>=19.4']
+      - dependency-name: react-dom
+        versions: ['>=19.4']
+      - dependency-name: react-server-dom-webpack
+        versions: ['>=19.4']
+      - dependency-name: '@types/react'
+        versions: ['>=20']
+      - dependency-name: '@types/react-dom'
+        versions: ['>=20']
+      # Upgrade manually: every Waku release must be checked against the request-handler patch.
+      - dependency-name: waku
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      github-actions:
+        patterns: ['*']

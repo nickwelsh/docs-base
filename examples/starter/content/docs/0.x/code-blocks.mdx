@@ -1,0 +1,42 @@
+---
+title: Code examples
+description: Highlighted code, tabs, file icons and type information.
+icon: code
+---
+
+## A named file
+
+```ts title="greeting.ts"
+export const greeting = 'Hello, Acorn!';
+```
+
+## Code tabs
+
+<CodeBlockTabs defaultValue="pnpm">
+  <CodeBlockTabsList>
+    <CodeBlockTabsTrigger value="pnpm">pnpm</CodeBlockTabsTrigger>
+    <CodeBlockTabsTrigger value="npm">npm</CodeBlockTabsTrigger>
+  </CodeBlockTabsList>
+  <CodeBlockTab value="pnpm">
+
+```sh title="Terminal"
+pnpm add @nickwelsh/docs-base
+```
+
+  </CodeBlockTab>
+  <CodeBlockTab value="npm">
+
+```sh title="Terminal"
+npm install @nickwelsh/docs-base
+```
+
+  </CodeBlockTab>
+</CodeBlockTabs>
+
+## Type information
+
+```ts twoslash
+const greeting = 'Hello, Acorn!';
+console.log(greeting);
+//          ^?
+```

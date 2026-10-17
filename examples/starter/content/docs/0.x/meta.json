@@ -1,0 +1,8 @@
+{
+    "title": "0.x",
+    "root": "version",
+    "version": {
+        "status": "deprecated"
+    },
+    "pages": ["index", "code-blocks", "guides", "..."]
+}

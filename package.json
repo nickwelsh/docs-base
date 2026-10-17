@@ -1,0 +1,19 @@
+{
+    "name": "docs-template-workspace",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "pnpm --filter @nickwelsh/docs-base build && pnpm --filter docs-starter dev",
+        "build": "pnpm --filter @nickwelsh/docs-base build && pnpm --filter docs-starter build",
+        "check": "pnpm --filter @nickwelsh/docs-base check && pnpm --filter docs-starter check",
+        "test": "pnpm --filter @nickwelsh/docs-base build && pnpm --filter @nickwelsh/docs-base test",
+        "pack:check": "node scripts/pack-check.mjs",
+        "create:site": "node scripts/create-site.mjs",
+        "format": "oxfmt",
+        "format:check": "oxfmt --check"
+    },
+    "devDependencies": {
+        "oxfmt": "^0.73.0"
+    },
+    "packageManager": "pnpm@12.14.0"
+}

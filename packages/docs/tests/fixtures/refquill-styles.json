@@ -1,0 +1,10 @@
+{
+    "source": "Refquill apps/docs/src/styles; defaults captured for the package extraction",
+    "styles": {
+        "material.css": "3a599e5a58f92cdb73771bf327673b9133d9adb12f5f72cba660df6362551c47",
+        "typeset.css": "b18712205a611acabfd103ceedbd23416e29a5f3f5fcb672a9d00706f9e06210",
+        "docs.css": "bea1824aa34a00706dc3f3b52eb608407f09ef685c9a625607250bfb80473e27",
+        "api-reference.css": "5d2a65d51bd615cb0dc953e2ec78703a9f49999ea4b6af03ec00dbcd8d189cc7"
+    },
+    "globals": "9882e2b9597d1587513ac8b990389dd9d3592d4ef1311606d5fac2442b01940a"
+}

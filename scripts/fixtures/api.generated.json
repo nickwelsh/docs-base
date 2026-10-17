@@ -1,0 +1,30 @@
+{
+    "schemaVersion": 1,
+    "generator": {
+        "name": "refquill",
+        "version": "0.1.0"
+    },
+    "title": "Widget API",
+    "fingerprint": "0000000000000000000000000000000000000000000000000000000000000000",
+    "inputs": [
+        {
+            "name": "widgets",
+            "language": "typescript"
+        }
+    ],
+    "types": [],
+    "symbols": [
+        {
+            "id": "widget",
+            "input": 0,
+            "kind": "class",
+            "name": "Widget",
+            "declaration": "export class Widget {}",
+            "description": "A generated widget declaration.",
+            "source": {
+                "file": "src/widget.ts",
+                "line": 5
+            }
+        }
+    ]
+}

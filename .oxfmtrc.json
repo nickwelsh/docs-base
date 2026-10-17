@@ -1,0 +1,27 @@
+{
+    "$schema": "./node_modules/oxfmt/configuration_schema.json",
+    "ignorePatterns": [
+        ".agents/**",
+        "skills-lock.json",
+        "**/dist/**",
+        "**/.source/**",
+        "artifacts/**",
+        "vendor/**",
+        "**/licenses/**",
+        "**/src/pages.gen.ts",
+        "pnpm-lock.yaml"
+    ],
+    "printWidth": 120,
+    "tabWidth": 4,
+    "semi": true,
+    "singleQuote": true,
+    "sortPackageJson": true,
+    "overrides": [
+        {
+            "files": ["**/*.{yaml,yml}"],
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
+}

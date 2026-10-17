@@ -1,0 +1,12 @@
+packages:
+  - packages/*
+  - examples/*
+allowBuilds:
+  esbuild: true
+patchedDependencies:
+  waku@1.0.0-rc.3: patches/waku@1.0.0-rc.3.patch
+minimumReleaseAgeExclude:
+  - '@nickwelsh/refquill-fumadocs@0.1.0'
+  - '@nickwelsh/refquill-schema@0.1.0'
+  - '@fumadocs/base-ui@16.17.5'
+  - fumadocs-core@16.17.5

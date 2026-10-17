@@ -1,0 +1,7 @@
+{
+    "title": "Guides",
+    "description": "Make the docs your own",
+    "icon": "settings",
+    "root": "section",
+    "pages": ["index"]
+}

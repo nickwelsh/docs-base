@@ -1,0 +1,7 @@
+node_modules/
+.pnpm-store/
+dist/
+.source/
+artifacts/
+.DS_Store
+.docs-base/

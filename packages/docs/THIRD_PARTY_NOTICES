@@ -1,0 +1,29 @@
+Included assets and styles
+==========================
+
+Carbon icons: Copyright IBM Corp. The static SVG icons are from Carbon Design
+System via @iconify-json/carbon, licensed under Apache-2.0. SVGs are compiled into
+React components without changing their paths.
+https://github.com/carbon-design-system/carbon/tree/main/packages/icons
+License: licenses/Apache-2.0.txt
+
+Inter Variable: Copyright 2016 The Inter Project Authors.
+https://github.com/rsms/inter
+License: licenses/Inter-OFL.txt
+
+JetBrains Mono Variable: Copyright 2020 The JetBrains Mono Project Authors.
+https://github.com/JetBrains/JetBrainsMono
+License: licenses/JetBrains-Mono-OFL.txt
+
+Code-file icon SVGs come from vscode-icons via @yutengjing/vscode-icons.
+The transformer embeds unmodified SVG assets as URL-encoded data URLs in generated
+documentation. Icon assets remain licensed under CC-BY-SA-4.0; users redistributing
+the generated assets must preserve attribution and the applicable asset license.
+https://github.com/vscode-icons/vscode-icons
+https://github.com/yutengjing/vscode-icons
+Licenses: licenses/vscode-icons-CC-BY-SA-4.0.txt and
+licenses/vscode-icons-package-MIT.txt
+
+Compiled styles include Fumadocs, Refquill, fumadocs-twoslash and tw-animate-css styles.
+Their upstream MIT licenses are included in licenses/.
+Other runtime dependencies remain separate packages with their own licenses.
