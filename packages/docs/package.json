@@ -1,6 +1,6 @@
 {
     "name": "@nickwelsh/docs-base",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A complete shared documentation application for MDX and Refquill content.",
     "license": "MIT",
     "repository": {

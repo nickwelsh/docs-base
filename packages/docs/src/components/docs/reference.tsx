@@ -1,5 +1,9 @@
-import { ReferencePage } from '@nickwelsh/refquill-fumadocs/components';
-import type { ReferenceHeaderProps, ReferenceRenderOptions } from '@nickwelsh/refquill-fumadocs/components';
+import { ReferenceEntry, ReferencePage } from '@nickwelsh/refquill-fumadocs/components';
+import type {
+    ReferenceEntryProps,
+    ReferenceHeaderProps,
+    ReferenceRenderOptions,
+} from '@nickwelsh/refquill-fumadocs/components';
 import { referenceHighlightTransformer, referenceLinkTransformer } from '@nickwelsh/refquill-fumadocs';
 import type { DocumentReference } from '@nickwelsh/refquill-fumadocs';
 import type { ComponentProps, ReactNode } from 'react';
@@ -24,6 +28,15 @@ function DefinitionCode(props: ComponentProps<typeof CodeBlock>) {
 
 function SchemaDefinitionCode(props: ComponentProps<typeof CodeBlock>) {
     return <DefinitionCode {...props} allowCopy copyMode="json-schema" />;
+}
+
+function ReferenceContentEntry({ entry, ...options }: ReferenceEntryProps) {
+    return (
+        <ReferenceEntry
+            {...options}
+            entry={entry.type?.key === 'type-parameter' ? { ...entry, display: 'disclosure' } : entry}
+        />
+    );
 }
 
 export function ApiBadge({ label, category }: { label: string; category: string }) {
@@ -87,6 +100,7 @@ export function ReferenceContent({
             page={page}
             document={rendering.document}
             icons={icons}
+            components={{ Entry: ReferenceContentEntry }}
             renderHeader={renderHeader ?? ((props) => <ReferenceHeader {...props} />)}
             renderLink={renderLink ?? ((props) => <ApiLink {...props} />)}
             renderBadge={(badge) => <ApiBadge {...badge} />}
