@@ -70,7 +70,7 @@ test('authored and generated pages share version navigation and Markdown exports
         widget.data.api.reference.getSourceUrl({ file: 'src/widget.ts', line: 5, endLine: 5 }),
         'https://github.com/example/birch/blob/stable/src/widget.ts#L5',
     );
-    assert.match(await text.index(), /https:\/\/docs.example.org\/docs\/handbook\/1.x/u);
+    assert.ok((await text.index()).includes('https://docs.example.org/docs/handbook/1.x'));
     const full = await text.full();
     for (const expected of ['Authored documentation.', 'A generated widget declaration.', 'Widget name'])
         assert.ok(full.includes(expected));
