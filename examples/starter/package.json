@@ -10,8 +10,8 @@
     },
     "dependencies": {
         "@nickwelsh/docs-base": "workspace:*",
-        "fumadocs-core": "16.17.5",
-        "fumadocs-mdx": "15.4.7",
+        "fumadocs-core": "16.17.7",
+        "fumadocs-mdx": "15.4.9",
         "fumadocs-ui": "npm:@fumadocs/base-ui@16.17.5",
         "react": "19.3.1",
         "react-dom": "19.3.1",
