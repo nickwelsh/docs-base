@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+SECONDS=0
+
+echo '==> Checking Node.js (requires 22.18+; CI also tests Node 24)'
+if ! node -e 'const [major, minor] = process.versions.node.split(".").map(Number); process.exit((major === 22 && minor >= 18) || (major >= 24 && (major !== 24 || minor >= 11)) ? 0 : 1)' 2>/dev/null; then
+    # n installs into /usr/local, which is on the orb login-shell PATH.
+    npx --yes n@10.2.0 24
+    hash -r
+fi
+node --version
+echo "==> Node ready (${SECONDS}s elapsed)"
+
+package_manager=$(node -p 'JSON.parse(require("node:fs").readFileSync("package.json", "utf8")).packageManager')
+pnpm_version=${package_manager#pnpm@}
+echo "==> Preparing $package_manager"
+if ! command -v pnpm >/dev/null || [[ "$(pnpm --version)" != "$pnpm_version" ]]; then
+    npm install --global "$package_manager"
+    hash -r
+fi
+pnpm --version
+echo "==> Package manager ready (${SECONDS}s elapsed)"
+
+echo '==> Installing locked workspace dependencies'
+pnpm install --frozen-lockfile
+echo "==> Dependencies ready (${SECONDS}s elapsed)"
+
+# The starter imports the library's dist exports, including during type checks.
+echo '==> Building the shared documentation library'
+pnpm --filter @nickwelsh/docs-base build
+echo "==> Orb setup finished (${SECONDS}s elapsed)"

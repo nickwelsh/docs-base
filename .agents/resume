@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Dependencies and library output are restored with the orb snapshot.
+# No authentication or backing services need repair on wake.
+echo 'docs-base is ready; no resume repairs required.'
