@@ -32,6 +32,8 @@ Set the public host in `origin` and a subdirectory in `basePath`. One setting co
 
 Use `pnpm build` for production and `pnpm start` to serve it. The package's `docs-base dev|build|start` commands use Waku. The initializer bundles the required pnpm patch for Waku rc.3 API handling; retain it until an upstream fix ships. Requires Node 22.18+ and pnpm.
 
+PHP type hovers are preconfigured through `@nickwelsh/threeslash`, alongside TypeScript Twoslash. Use `php threeslash` fences with `// ^?` queries and `// ---cut---` hidden setup. The shared styles, popups and copy button handle the output automatically. Install [PHPantom 0.11.1](https://github.com/PHPantom-dev/phpantom_lsp/releases/tag/0.11.1) on the build machine (for example, `cargo install phpantom_lsp --version 0.11.1 --locked`), on `PATH` or via `PHPANTOM_BIN`. The bundled starter includes an annotated PHP example, so it needs this binary. Ordinary PHP fences do not. No PHP runtime is required; snippets are never executed, and unexpected diagnostics fail the build.
+
 [Full configuration, development and release guide](https://github.com/nickwelsh/docs-base#readme).
 
 Low-level component and integration entries remain available: `/components`, `/mdx`, `/source`, `/config`, `/waku`, `/vite`, `/code`, `/styles.css`, `/refquill`. These share the same implementation as the complete application.

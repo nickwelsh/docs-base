@@ -23,6 +23,19 @@ fi
 pnpm --version
 echo "==> Package manager ready (${SECONDS}s elapsed)"
 
+echo '==> Preparing PHPantom 0.11.1 for Threeslash examples'
+if [[ "$(phpantom_lsp --version 2>/dev/null || true)" != 'phpantom_lsp 0.11.1' ]]; then
+    phpantom_tmp=$(mktemp -d)
+    trap 'rm -rf "$phpantom_tmp"' EXIT
+    mkdir -p "$HOME/.local/bin"
+    curl -fsSL "https://github.com/PHPantom-dev/phpantom_lsp/releases/download/0.11.1/phpantom_lsp-$(uname -m)-unknown-linux-gnu.tar.gz" | tar -xz -C "$phpantom_tmp"
+    install "$phpantom_tmp/phpantom_lsp" "$HOME/.local/bin/phpantom_lsp"
+    rm -rf "$phpantom_tmp"
+    trap - EXIT
+fi
+phpantom_lsp --version
+echo "==> PHPantom ready (${SECONDS}s elapsed)"
+
 echo '==> Installing locked workspace dependencies'
 pnpm install --frozen-lockfile
 echo "==> Dependencies ready (${SECONDS}s elapsed)"

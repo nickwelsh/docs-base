@@ -40,3 +40,16 @@ const greeting = 'Hello, Acorn!';
 console.log(greeting);
 //          ^?
 ```
+
+## PHP type information
+
+PHP fences marked with `threeslash` use PHPantom at build time. Hover or focus a symbol to inspect its type. Copying includes only the visible PHP source, not the type annotations or hidden setup.
+
+```php threeslash title="greeting.php"
+<?php
+// ---cut---
+$name = 'Acorn';
+// ^?
+$length = strlen($name);
+echo $length;
+```

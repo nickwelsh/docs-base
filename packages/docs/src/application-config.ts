@@ -4,6 +4,8 @@ import type { Config as WakuConfig } from 'waku/config';
 import { defineDocs, defineConfig as defineMdxConfig } from 'fumadocs-mdx/config';
 import { fumadocsMdx } from 'fumadocs-mdx/vite';
 import { transformerTwoslash } from 'fumadocs-twoslash';
+import { transformerThreeslashFumadocs } from '@nickwelsh/threeslash';
+import type { ShikiTransformer } from 'shiki';
 import { rehypeCodeDefaultOptions } from 'fumadocs-core/mdx-plugins';
 import icons from 'unplugin-icons/vite';
 import { carbonIcons } from './tooling/carbon-icons.js';
@@ -154,6 +156,9 @@ export function defineConfig(input: DocsConfig): WakuConfig {
                                     themes: { light: 'github-light', dark: 'github-dark' },
                                     transformers: [
                                         ...(rehypeCodeDefaultOptions.transformers ?? []),
+                                        // Threeslash 0.0.6 types _fd_prepare with Shiki's required theme;
+                                        // Fumadocs supplies its theme later, after async preparation.
+                                        transformerThreeslashFumadocs() as ShikiTransformer,
                                         transformerTwoslash(),
                                         transformerFileIcons(),
                                     ],

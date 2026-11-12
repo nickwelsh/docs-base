@@ -9,6 +9,7 @@ export function CodeBlock({
     title,
     'data-file-icon': fileIcon,
     'data-file-icon-light': fileIconLight,
+    'data-threeslash-code': source,
     allowCopy = true,
     copyMode = 'code',
     className,
@@ -17,12 +18,13 @@ export function CodeBlock({
     title?: ReactNode;
     'data-file-icon'?: string;
     'data-file-icon-light'?: string;
+    'data-threeslash-code'?: string;
     allowCopy?: boolean | 'true' | 'false';
     copyMode?: 'code' | 'json-schema';
 }) {
     const ref = useRef<HTMLPreElement>(null);
     const copying = allowCopy !== false && allowCopy !== 'false';
-    const getText = () => ref.current?.textContent ?? '';
+    const getText = () => source ?? ref.current?.textContent ?? '';
     return (
         <figure className="docs-code-block not-typeset">
             {Boolean(title) && (
@@ -52,7 +54,7 @@ export function CodeBlock({
                 </figcaption>
             )}
             <div className="docs-code-inner">
-                <pre {...props} ref={ref} className={className}>
+                <pre {...props} data-threeslash-code={source} ref={ref} className={className}>
                     {children}
                 </pre>
                 {copying && copyMode === 'code' && (

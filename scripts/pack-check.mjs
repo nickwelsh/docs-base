@@ -74,6 +74,13 @@ for (const expected of [
 }
 for (const wrong of [`${basePath}/handbook/code-blocks`, `${basePath}${basePath}`])
     assert.ok(!html.includes(`href="${wrong}`), wrong);
+const codeHtml = await readFile(path.join(output, 'handbook/1.x/code-blocks/index.html'), 'utf8');
+const phpBlock = codeHtml.match(/<pre\b[^>]*data-threeslash-code="([^"]*)"[^>]*>([\s\S]*?)<\/pre>/u);
+assert.ok(phpBlock, 'Packed sites must compile PHP Threeslash without consumer MDX configuration');
+assert.equal(phpBlock[1], '$name = &#x27;Birch&#x27;;\n$length = strlen($name);\necho $length;');
+assert.ok(phpBlock[2].includes('twoslash-query'), 'PHP inline types must render');
+assert.ok(phpBlock[2].includes('aria-haspopup="dialog"'), 'PHP symbols must expose type popups');
+assert.ok(!phpBlock[2].includes('&lt;?php'), 'Hidden PHP setup must not render');
 const referenceHtml = await readFile(path.join(output, 'handbook/1.x/schema/index.html'), 'utf8');
 for (const expected of ['Widget schema', 'api-reference-header']) assert.ok(referenceHtml.includes(expected), expected);
 const apiRoot = path.join(output, 'handbook/1.x/api');

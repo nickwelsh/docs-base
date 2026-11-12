@@ -76,6 +76,14 @@ export default defineConfig({
 
 Keep generated references separate from authored pages. Overlapping reference prefixes or authored/generated routes fail the build instead of silently replacing content. Missing inputs and invalid documents also fail the build. Refquill CLI configuration, generation and language tooling remain site responsibilities; sites do not implement reference pages or rendering.
 
+### PHP type hovers with Threeslash
+
+`@nickwelsh/threeslash` is included and configured alongside TypeScript Twoslash. Mark PHP fences with `php threeslash` to enable type hovers, inline `// ^?` queries, hidden setup (`// ---cut---`) and expected diagnostics (`// @errors: code`). The shared popup components, stylesheet and source-aware copy button are already wired in; no consumer MDX configuration is needed.
+
+Install [PHPantom 0.11.1](https://github.com/PHPantom-dev/phpantom_lsp/releases/tag/0.11.1) on every machine that builds annotated PHP content, including CI. Use `cargo install phpantom_lsp --version 0.11.1 --locked` or a release binary. The executable must be on `PATH`, or set `PHPANTOM_BIN` to its absolute path. PHP and PHPStan are not required, and snippets are analyzed, never executed. Ordinary PHP fences do not invoke the analyzer. Unexpected errors fail the build.
+
+This repository's CI and orb setup install PHPantom for the starter's PHP example. Sites without annotated PHP content do not need the binary.
+
 ## Build and update
 
 ```sh
