@@ -162,6 +162,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@hono/node-server@>=2.0.0 <2.1.8': 2.1.8
+
 patchedDependencies:
   waku@1.0.0-rc.3: f016f2e3d6c13cad1c3990034d24a0d9e68b880c5bb81370e4044af5aa596212
 
