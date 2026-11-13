@@ -6,7 +6,7 @@
         "dev": "pnpm --filter @nickwelsh/docs-base build && pnpm --filter docs-starter dev",
         "build": "pnpm --filter @nickwelsh/docs-base build && pnpm --filter docs-starter build",
         "check": "pnpm --filter @nickwelsh/docs-base check && pnpm --filter docs-starter check",
-        "test": "pnpm --filter @nickwelsh/docs-base build && pnpm --filter @nickwelsh/docs-base test",
+        "test": "node --test scripts/node-adapter.test.mjs && pnpm --filter @nickwelsh/docs-base build && pnpm --filter @nickwelsh/docs-base test",
         "pack:check": "node scripts/pack-check.mjs",
         "create:site": "node scripts/create-site.mjs",
         "format": "oxfmt",
