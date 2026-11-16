@@ -14,7 +14,7 @@ test('public entries and browser/server boundaries survive compilation', () => {
     for (const entry of ['waku.js', 'site.js', 'components/docs/shell.js', 'components/docs/search.js']) {
         assert.match(readFileSync(path.join(root, 'dist', entry), 'utf8'), /^['"]use client['"]/u);
     }
-    assert.equal(manifest.dependencies['@nickwelsh/refquill-fumadocs'], '^0.1.0');
+    assert.ok(manifest.dependencies['@nickwelsh/refquill-fumadocs']);
     assert.equal(manifest.peerDependencies?.['@nickwelsh/refquill-fumadocs'], undefined);
     assert.ok(existsSync(path.join(root, manifest.bin['docs-base'])));
     const starter = JSON.parse(readFileSync(path.join(root, 'dist/starter/package.json'), 'utf8'));

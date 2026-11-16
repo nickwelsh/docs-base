@@ -45,9 +45,22 @@ export function githubFileUrl(
 
 export function createDocsSource(config: ResolvedDocsConfig, authored: MdxSource, inputs: unknown[] = []) {
     if (inputs.length !== config.refquill.length) throw new Error('Missing configured Refquill inputs.');
-    const files: VirtualFile<{ pageData: ContentData; metaData: DocsMeta }>[] = authored.files.map((file) =>
-        file.type === 'page' ? { ...file, data: { ...file.data, kind: 'mdx' } } : file,
-    );
+    const files: VirtualFile<{ pageData: ContentData; metaData: DocsMeta }>[] = authored.files.map((file) => {
+        if (file.type === 'meta') return file;
+        const { dataAt, ...page } = file;
+        return {
+            ...page,
+            data: { ...file.data, kind: 'mdx' },
+            ...(dataAt
+                ? {
+                      dataAt: (params, custom) => ({
+                          ...dataAt(params, custom?.data.kind === 'mdx' ? { ...custom, data: custom.data } : undefined),
+                          kind: 'mdx',
+                      }),
+                  }
+                : {}),
+        };
+    });
     for (const [index, options] of config.refquill.entries()) {
         const prefix = options.baseUrl.slice(config.docsRoute.length + 1);
         const reference =
@@ -93,7 +106,9 @@ export function createDocsSource(config: ResolvedDocsConfig, authored: MdxSource
             } else {
                 const apiPage = apiPages.get(file.slugs!.join('/'));
                 files.push({
-                    ...file,
+                    type: 'page',
+                    ...(file.absolutePath !== undefined ? { absolutePath: file.absolutePath } : {}),
+                    ...(file.locale !== undefined ? { locale: file.locale } : {}),
                     path: virtualPath,
                     slugs: [...prefix.split('/'), ...file.slugs!],
                     data: {
