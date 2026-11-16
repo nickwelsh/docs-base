@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFileSync } from 'node:fs';
 import { registerHooks } from 'node:module';
+import { asMarkdown } from 'fumadocs-core/server';
+import { server } from 'fumadocs-mdx/runtime/server';
 import { resolveDocsConfig } from '../dist/application-config.js';
 
 // The bundler supplies this module from authored icon usage. Data tests have no icons.
@@ -73,6 +75,41 @@ test('authored and generated pages share version navigation and Markdown exports
     assert.ok((await text.index()).includes('https://docs.example.org/docs/handbook/1.x'));
     const full = await text.full();
     for (const expected of ['Authored documentation.', 'A generated widget declaration.', 'Widget name'])
+        assert.ok(full.includes(expected));
+});
+
+test('dynamic MDX pages retain their content kind and render params and custom props', async () => {
+    const collection = await server().docs(
+        'docs',
+        '',
+        {},
+        {
+            '1.x/[framework].mdx': {
+                frontmatter: {
+                    title: 'Framework guide',
+                    staticParams: [{ framework: 'react' }, { framework: 'vue' }],
+                },
+                default: () => null,
+                toc: [],
+                structuredData: { headings: [], contents: [] },
+                _markdown: ({ framework, audience = 'beginner' }) => {
+                    asMarkdown();
+                    return `${framework} for ${audience}`;
+                },
+            },
+        },
+    );
+    const { source, text } = createDocsSource(config, collection.toFumadocsSource(), [api, reference]);
+    for (const framework of ['react', 'vue']) {
+        const page = source.getPage(['1.x', framework]);
+        assert.equal(page?.data.kind, 'mdx');
+        assert.equal(await page.data.getText('processed'), `${framework} for beginner`);
+    }
+    const custom = source.getPage(['1.x', 'vue'], { props: { audience: 'experts' } });
+    assert.equal(custom?.data.kind, 'mdx');
+    assert.equal(await custom.data.getText('processed'), 'vue for experts');
+    const full = await text.full();
+    for (const expected of ['react for beginner', 'vue for beginner', 'A generated widget declaration.'])
         assert.ok(full.includes(expected));
 });
 
